@@ -156,7 +156,9 @@ def run(
                     s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
 
                 # Write results
+                a=0
                 for *xyxy, conf, cls in reversed(det):
+                    a+=1
                     if save_txt:  # Write to file
                         xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh
                         line = (cls, *xywh, conf) if save_conf else (cls, *xywh)  # label format
@@ -169,7 +171,7 @@ def run(
                         annotator.box_label(xyxy, label, color=colors(c, True))
                         if save_crop:
                             save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
-
+                cv2.putText(im0, f'Detected objects: {a}', (10, 40), cv2.LINE_AA, 1, colors(c, True), 2)
             # Stream results
             im0 = annotator.result()
             if view_img:
