@@ -152,10 +152,11 @@ def run(
                 det[:, :4] = scale_coords(im.shape[2:], det[:, :4], im0.shape).round()
 
                 # Print results
+                t=[]
                 for c in det[:, -1].unique():
                     n = (det[:, -1] == c).sum()  # detections per class
                     s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
-                    t += f"{n} {names[int(c)]}{'s' * (n > 1)}, "+"\n"
+                    t.append(f"{n} {names[int(c)]}{'s' * (n > 1)}, ")
 
                 # Write results
                 a=0
@@ -175,9 +176,9 @@ def run(
                             save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
                 #cv2.putText(im0, f'Detected objects: {a}', (10, 40), cv2.LINE_AA, 1, colors(c, True), 2)
                 y0, dy = 50, 4
-                for i, line in enumerate(t.split('\n')):
+                for i in range(len(t)):
                     y = y0 + i*dy
-                    cv2.putText(im0, line, (50, y ), cv2.FONT_HERSHEY_SIMPLEX, 1, 2)
+                    cv2.putText(im0, t[i], (50, y ), cv2.FONT_HERSHEY_SIMPLEX, 1, 2)
                 #cv2.putText(im0, t , (10, 40), cv2.LINE_AA, 1, colors(c, True), 2)
             # Stream results
             im0 = annotator.result()
