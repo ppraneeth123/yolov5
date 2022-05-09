@@ -178,10 +178,10 @@ def run(
                         if save_crop:
                             save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
                 #cv2.putText(im0, f'Detected objects: {a}', (10, 40), cv2.LINE_AA, 1, colors(c, True), 2)
-                y0, dy = 50, 4
+                y0, dy = 50, 10
                 for i in range(len(t)):
                     y = y0 + i*dy
-                    cv2.putText(im0, t[i], (50, y ), cv2.FONT_HERSHEY_SIMPLEX, 1, 2)
+                    cv2.putText(im0, t[i], (30, y ), cv2.LINE_AA, 1, colors(c, True), 2)
                 #cv2.putText(im0, t , (10, 40), cv2.LINE_AA, 1, colors(c, True), 2)
             # Stream results
             im0 = annotator.result()
