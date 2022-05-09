@@ -180,8 +180,8 @@ def run(
                 #cv2.putText(im0, f'Detected objects: {a}', (10, 40), cv2.LINE_AA, 1, colors(c, True), 2)
                 y0, dy = 50, 15
                 for ii in range(0,len(t),2):
-                    if i%2==0:
-                        y = y0 + i*dy
+                    if ii%2==0:
+                        y = y0 + ii*dy
                         if ii+1 < len(t):
                             cv2.putText(im0, t[ii]+t[ii+1], (10, y ), cv2.LINE_AA, 1, (255,255,255) , 2)
                         else:
