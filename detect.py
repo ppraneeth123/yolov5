@@ -146,6 +146,7 @@ def run(
             gn = torch.tensor(im0.shape)[[1, 0, 1, 0]]  # normalization gain whwh
             imc = im0.copy() if save_crop else im0  # for save_crop
             annotator = Annotator(im0, line_width=line_thickness, example=str(names))
+            t=""
             if len(det):
                 # Rescale boxes from img_size to im0 size
                 det[:, :4] = scale_coords(im.shape[2:], det[:, :4], im0.shape).round()
@@ -154,6 +155,7 @@ def run(
                 for c in det[:, -1].unique():
                     n = (det[:, -1] == c).sum()  # detections per class
                     s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
+                    t += f"{n} {names[int(c)]}{'s' * (n > 1)}, "
 
                 # Write results
                 a=0
@@ -172,7 +174,7 @@ def run(
                         if save_crop:
                             save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
                 #cv2.putText(im0, f'Detected objects: {a}', (10, 40), cv2.LINE_AA, 1, colors(c, True), 2)
-                cv2.putText(im0, s , (10, 40), cv2.LINE_AA, 1, colors(c, True), 2)
+                cv2.putText(im0, t , (10, 40), cv2.LINE_AA, 1, colors(c, True), 2)
             # Stream results
             im0 = annotator.result()
             if view_img:
