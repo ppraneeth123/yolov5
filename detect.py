@@ -153,10 +153,13 @@ def run(
 
                 # Print results
                 t=[]
+                
                 for c in det[:, -1].unique():
                     n = (det[:, -1] == c).sum()  # detections per class
                     s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
-                    t.append(f"{n} {names[int(c)]}{'s' * (n > 1)}, ")
+                    tmp = ""
+                    tmp += f"{n} {names[int(c)]}{'s' * (n > 1)}, "
+                    t.append(tmp)
 
                 # Write results
                 a=0
