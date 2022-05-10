@@ -187,7 +187,8 @@ def run(
                         else:
                             cv2.putText(im0, t[ii], (10, y ), cv2.LINE_AA, 1, (255,255,255) , 2)
                 #cv2.putText(im0, t , (10, 40), cv2.LINE_AA, 1, colors(c, True), 2)
-                annotator.text(xyxy, s, txt_color=(255, 255, 255))
+                annotator.text(xyxy, s, txt_color=(0, 0, 255))
+                print(xyxy)
             # Stream results
             im0 = annotator.result()
             if view_img:
