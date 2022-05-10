@@ -145,7 +145,7 @@ def run(
             s += '%gx%g ' % im.shape[2:]  # print string
             gn = torch.tensor(im0.shape)[[1, 0, 1, 0]]  # normalization gain whwh
             imc = im0.copy() if save_crop else im0  # for save_crop
-            annotator = Annotator(im0, line_width=line_thickness, example=str(names))
+            annotator = Annotator(im0, line_width=line_thickness,pil=True, example=str(names))
             t=""
             if len(det):
                 # Rescale boxes from img_size to im0 size
@@ -175,7 +175,6 @@ def run(
                         c = int(cls)  # integer class
                         label = None if hide_labels else (names[c] if hide_conf else f'{names[c]} {conf:.2f}')
                         annotator.box_label(xyxy, label, color=colors(c, True))
-                        annotator.text(xyxy, s, txt_color=(255, 255, 255))
                         if save_crop:
                             save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
                 #cv2.putText(im0, f'Detected objects: {a}', (10, 40), cv2.LINE_AA, 1, colors(c, True), 2)
@@ -188,6 +187,7 @@ def run(
                         else:
                             cv2.putText(im0, t[ii], (10, y ), cv2.LINE_AA, 1, (255,255,255) , 2)
                 #cv2.putText(im0, t , (10, 40), cv2.LINE_AA, 1, colors(c, True), 2)
+                annotator.text(xyxy, s, txt_color=(255, 255, 255))
             # Stream results
             im0 = annotator.result()
             if view_img:
