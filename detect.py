@@ -183,12 +183,13 @@ def run(
                     if ii%2==0:
                         y = y0 + ii*dy
                         if ii+1 < len(t):
-                            cv2.putText(im0, t[ii]+t[ii+1], (10, y ), cv2.LINE_AA, 1, (255,255,255) , 2)
+                            cv2.putText(im0, t[ii]+t[ii+1], (10, y ), cv2.LINE_AA, 1, (0,0,0) , 2)
+                            
                         else:
-                            cv2.putText(im0, t[ii], (10, y ), cv2.LINE_AA, 1, (255,255,255) , 2)
+                            cv2.putText(im0, t[ii], (10, y ), cv2.LINE_AA, 1, (0,0,0) , 2)
                 #cv2.putText(im0, t , (10, 40), cv2.LINE_AA, 1, colors(c, True), 2)
-                annotator.text(xyxy, s, txt_color=(0, 0, 255))
-                print(xyxy)
+                #annotator.text(xyxy, s, txt_color=(0, 0, 0))
+                #print(xyxy)
             # Stream results
             im0 = annotator.result()
             if view_img:
