@@ -179,13 +179,13 @@ def run(
                             save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
                 cv2.putText(im0, f'Detected objects: {a}', (10, 40), cv2.LINE_AA, 1, colors(c, True), 2)
                 y0, dy = 50, 35
-                for i in range(0,len(t),2):
-                    if i%2==0:
-                        y = y0 + i*dy
-                        if i+1 < len(t):
-                            cv2.putText(im0, t[i]+t[i+1], (30, y ), cv2.LINE_AA, 1, (255,255,255) , 2)
-                        else:
-                            cv2.putText(im0, t[i], (30, y ), cv2.LINE_AA, 1, (255,255,255) , 2)
+#                 for i in range(0,len(t),2):
+#                     if i%2==0:
+#                         y = y0 + i*dy
+#                         if i+1 < len(t):
+#                             cv2.putText(im0, t[i]+t[i+1], (30, y ), cv2.LINE_AA, 1, (255,255,255) , 2)
+#                         else:
+#                             cv2.putText(im0, t[i], (30, y ), cv2.LINE_AA, 1, (255,255,255) , 2)
                 #cv2.putText(im0, t , (10, 40), cv2.LINE_AA, 1, colors(c, True), 2)
             # Stream results
             im0 = annotator.result()
